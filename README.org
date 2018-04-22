@@ -1,0 +1,30 @@
+#+TITLE: README
+* Requirement:
+
+- flask, flask_wtf, flask_sqlalchemy, flask_migrate:
+  #+BEGIN_SRC sh
+pip install flask flask_wtf flask_sqlalchemy flask_migrate
+  #+END_SRC
+
+- setting up database:
+#+BEGIN_SRC sh
+export FLASK_APP=urlShortener.py
+./setup.sh
+#+END_SRC
+
+* Feature:
+- Shorten long URL to short codes (either using generated or custom codes)
+
+* Approach:
+- Using SQLAlchemy to create 2 models: URL and Shorten_URL
+| URL    | Shorten_URL |
+|--------+-------------|
+| id     | id          |
+| URL    | Shorten_URL |
+| access | url_id      |
+- Shorten_URL connect to URL with url_id = URL.id
+
+* TODO 
+- Analytics
+- May transfer access to a different model in the database
+- Refractoring (more descriptive name for variables and functions)

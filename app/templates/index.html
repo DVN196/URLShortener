@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.url.label }}<br>
+        {{ form.url() }}
+        {% for error in form.url.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+    {% if code %}
+    <p> The code for URL is: <a href="{{ url_for('goto', code=code ) }}">{{ code }}</a></p>
+    {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Untitled</title>
+        {% if title %}
+        <title>{{title}}</title>
+        {% else %}
+        <title>URL Shortener Service</title>
+        {% endif %}
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+
+        <div>
+            Custom URL:
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('custom') }}">Get Custom URL</a>
+        </div><hr>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
