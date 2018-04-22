@@ -1,28 +1,33 @@
 #!/usr/bin/env python
 
 from app import db
+from datetime import datetime
 
 
 class URL(db.Model):
     __tablename__ = "url"
     id = db.Column(db.Integer, primary_key=True)
-    URL = db.Column(db.String(), unique=True)
-    access = db.Column(db.Integer, default=1)
-    shorten_URL = db.relationship('Shorten_URL', backref='real_URL', lazy='dynamic')
+    url = db.Column(db.String(), unique=True)
+    codes = db.relationship('Code', backref='url', lazy='dynamic')
+    entries = db.relationship('Entry', backref='url', lazy='dynamic')
 
-    # def create_short_URL(self):
-    #     i = id
-    #     sURL = encode(id)
-    #     while Shorten_URL.query.filter_by(code=sURL).first is not None:
-    #         i += 1
-    #         sURL = encode(id)
-    #     return sURL
+    def __repr(self):
+        return self.url
 
 
-class Shorten_URL(db.Model):
+class Code(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(), unique=True)
     url_id = db.Column(db.Integer, db.ForeignKey('url.id'))
+    code = db.Column(db.String(), unique=True)
 
     def __repr__(self):
         return self.code
+
+
+class Entry(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url_id = db.Column(db.Integer, db.ForeignKey('url.id'))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return str(self.timestamp)

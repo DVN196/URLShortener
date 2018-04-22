@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from app.models import Shorten_URL
+from app.models import Code
 
 digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 base = len(digits)
+max_value = base ** 6
 
 
 def encode(num):
@@ -15,11 +16,12 @@ def encode(num):
 
 
 def code_generator():
-    i = len(Shorten_URL.query.all()) + 1
+    i = len(Code.query.all()) + 1
     j = 1
     code = encode(i)
-    while Shorten_URL.query.filter_by(code=code).first() is not None:
+    while Code.query.filter_by(code=code).first() is not None:
         i += j
+        i = i % max_value
         j += 1
         code = encode(i)
     return code
