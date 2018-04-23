@@ -61,7 +61,9 @@ def stat_all():
 
     return render_template("stat_all.html",
                            title="Full statistic",
-                           urls=URL.query.all())
+                           urls=URL.query.outerjoin(Hit).group_by(URL.id).
+                           order_by(func.count(Hit.id).desc())
+    )
     return ""
 
 @app.route('/stats/<int:url_id>')
@@ -71,5 +73,5 @@ def stat(url_id):
         return render_template("stat_url.html",
                                title="Statistic",
                                urls=[u],
-                               url=u)
+                               hits=u.hits.order_by(Hit.timestamp.desc()))
     return url_for("index")

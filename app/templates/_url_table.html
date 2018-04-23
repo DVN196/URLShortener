@@ -1,0 +1,9 @@
+<table>
+    <tr>
+        <td>URL</td>
+        <td>Total hits</td>
+    </tr>
+    {% for url in urls %}
+    {% include '_url_entry.html' %}
+    {% endfor %}
+</table>

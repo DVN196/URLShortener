@@ -1,0 +1,4 @@
+<tr>
+    <td><a href="{{ url_for('stat', url_id=url.id ) }}">{{ url.url|truncate(40, False, '...') }}</a></td>
+    <td>{{ url.total_hit() }}</td>
+</tr>

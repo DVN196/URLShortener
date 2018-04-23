@@ -34,6 +34,6 @@ class GetCustomURLForm(FlaskForm):
 
 class GetURLForm(FlaskForm):
     url = StringField('URL',
-                      validators=[DataRequired(), 
+                      validators=[DataRequired(),
                                   URL(require_tld=False, message=msg['URL'])])
     submit = SubmitField('Get code')
