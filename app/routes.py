@@ -3,7 +3,7 @@
 from app import app, db
 from flask import render_template, redirect, url_for
 from app.forms import GetURLForm, GetCustomURLForm
-from app.models import URL, Code, Entry
+from app.models import URL, Code, Hit
 from sqlalchemy.sql.expression import func
 from app.encoder import code_generator
 
@@ -48,8 +48,8 @@ def goto(code):
     c = Code.query.filter_by(code=code).first()
     if c is not None:
         u = URL.query.get(c.url_id)
-        e = Entry(url=u)
-        db.session.add(e)
+        h = Hit(url=u)
+        db.session.add(h)
         db.session.commit()
         return redirect(u.url)
     return redirect(url_for('index'))
@@ -58,8 +58,18 @@ def goto(code):
 
 @app.route('/stats_all')
 def stat_all():
+
+    return render_template("stat_all.html",
+                           title="Full statistic",
+                           urls=URL.query.all())
     return ""
 
 @app.route('/stats/<int:url_id>')
 def stat(url_id):
-    return ""
+    u = URL.query.filter_by(id=url_id).first()
+    if u is not None:
+        return render_template("stat_url.html",
+                               title="Statistic",
+                               urls=[u],
+                               url=u)
+    return url_for("index")

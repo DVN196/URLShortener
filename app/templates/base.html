@@ -3,9 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Untitled</title>
         {% if title %}
-        <title>{{title}}</title>
+        <title>{{ title }}</title>
         {% else %}
         <title>URL Shortener Service</title>
         {% endif %}
@@ -18,7 +17,8 @@
         <div>
             Custom URL:
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('custom_code') }}">Get Custom Code</a>
+            <a href="{{ url_for('custom_code') }}">Custom Code</a>
+            <a href="{{ url_for('stat_all') }}">Statistics</a>
         </div><hr>
         {% block content %}
         {% endblock %}
