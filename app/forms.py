@@ -14,10 +14,10 @@ msg = {'URL': 'Not a valid URL',
 
 
 class GetCustomURLForm(FlaskForm):
-    url = StringField('URL',
-                      validators=[DataRequired(),
-                                  URL(require_tld=False,
-                                      message=msg['URL'])])
+    url = StringField(
+        'URL',
+        validators=[DataRequired(),
+                    URL(require_tld=False, message=msg['URL'])])
     customcode = StringField(
         'Code',
         validators=[DataRequired(),
@@ -33,7 +33,8 @@ class GetCustomURLForm(FlaskForm):
 
 
 class GetURLForm(FlaskForm):
-    url = StringField('URL',
-                      validators=[DataRequired(),
-                                  URL(require_tld=False, message=msg['URL'])])
+    url = StringField(
+        'URL',
+        validators=[DataRequired(),
+                    URL(require_tld=False, message=msg['URL'])])
     submit = SubmitField('Get code')

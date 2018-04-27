@@ -2,5 +2,10 @@
 
 {% block content %}
 {% include '_url_table.html' %}
-{% include '_hit_table.html' %}
+{% set list = hits %}
+{% set list_name = "Time" %}
+{% include '_list_table.html' %}
+{% set list = codes %}
+{% set list_name = "Code" %}
+{% include '_list_table.html' %}
 {% endblock %}

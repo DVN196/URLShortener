@@ -1,4 +1,6 @@
 <tr>
-    <td><a href="{{ url_for('stat', url_id=url.id ) }}">{{ url.url|truncate(40, False, '...') }}</a></td>
-    <td>{{ url.total_hit() }}</td>
+    <td><a href="{{ url_for('stat', url_id=url.id ) }}" title="{{ url.url }}">{{ url.url|truncate(40, False, '...') }}</a></td>
+    <td>{{ url.codes.count() }}</td>
+    <td>{{ url.hits.count() }}</td>
+    <td>{{ url.daily_hits().count() }}</td>
 </tr>

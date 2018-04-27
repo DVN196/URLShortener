@@ -1,0 +1,8 @@
+<table>
+    <tr>
+        <td>{{ list_name }}</td>
+    </tr>
+    {% for entry in list %}
+    {% include '_list_entry.html' %}
+    {% endfor %}
+</table>
