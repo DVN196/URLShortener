@@ -17,7 +17,7 @@ def encode(num):
 
 
 def code_generator():
-    i = Code.query.all().count() + 1
+    i = Code.query.count() + 1
     j = 1
     code = encode(i)
     while Code.query.filter_by(code=code).first() is not None:
