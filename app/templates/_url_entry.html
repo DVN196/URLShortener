@@ -1,5 +1,7 @@
 <tr>
     <td><a href="{{ url_for('stat', url_id=url.id ) }}" title="{{ url.url }}">{{ url.url|truncate(40, False, '...') }}</a></td>
+    {% set short_url = url_for('goto', code=url.codes.first()) %}
+    <td><a href="{{ short_url }}">{{ short_url }}</a></td>
     <td>{{ url.codes.count() }}</td>
     <td>{{ url.hits.count() }}</td>
     <td>{{ url.daily_hits().count() }}</td>

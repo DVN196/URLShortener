@@ -72,7 +72,8 @@ def stat(url_id):
     u = URL.query.filter_by(id=url_id).first()
     if u is not None:
         codes = u.codes.order_by(func.length(Code.code))
-        codes_url = (Markup("<a href='{}'>{}</a>".format(u, code.code))
+        codes_url = (Markup("<a href='{url}'>{url}</a>".
+                            format(url=url_for("goto", code=code.code)))
                      for code in codes)
         return render_template("stat_url.html",
                                title="Statistic",

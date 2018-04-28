@@ -18,7 +18,7 @@ class URL(db.Model):
         return self.hits.\
             filter(Hit.timestamp > datetime.utcnow() - timedelta(1)).\
             order_by(Hit.timestamp.desc())
-
+    
 
 class Code(db.Model):
     id = db.Column(db.Integer, primary_key=True)

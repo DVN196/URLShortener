@@ -11,8 +11,6 @@
         {% endfor %}
     </p>
     <p>{{ form.submit() }}</p>
-    {% if code %}
-    <p> The code for URL is: <a href="{{ url_for('goto', code=code ) }}">{{ code }}</a></p>
-    {% endif %}
+    {% include '_get_url.html' %}
 </form>
 {% endblock %}

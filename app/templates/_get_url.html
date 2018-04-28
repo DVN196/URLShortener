@@ -1,0 +1,4 @@
+{% if code %}
+{% set short_url = url_for('goto', code=code) %}
+<p> The shortened URL is: <a href="{{ short_url }}">{{ short_url }}</a></p>
+{% endif %}
