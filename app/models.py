@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 
 class URL(db.Model):
+    """Original URL"""
     __tablename__ = "url"
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(), unique=True)
@@ -13,14 +14,15 @@ class URL(db.Model):
 
     def __repr__(self):
         return self.url
-   
+
     def daily_hits(self):
         return self.hits.\
             filter(Hit.timestamp > datetime.utcnow() - timedelta(1)).\
             order_by(Hit.timestamp.desc())
-    
+
 
 class Code(db.Model):
+    """Shorten URL"""
     id = db.Column(db.Integer, primary_key=True)
     url_id = db.Column(db.Integer, db.ForeignKey('url.id'))
     code = db.Column(db.String(), unique=True)
@@ -31,6 +33,7 @@ class Code(db.Model):
 
 
 class Hit(db.Model):
+    """Each hit is an access to using the shorten URL"""
     id = db.Column(db.Integer, primary_key=True)
     url_id = db.Column(db.Integer, db.ForeignKey('url.id'))
     code_id = db.Column(db.Integer, db.ForeignKey('code.id'))

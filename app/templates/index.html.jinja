@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.jinja" %}
 
 {% block content %}
 <form action="" method="post">
@@ -11,6 +11,6 @@
         {% endfor %}
     </p>
     <p>{{ form.submit() }}</p>
-    {% include '_get_url.html' %}
+    {% include '_get_url.html.jinja' %}
 </form>
 {% endblock %}

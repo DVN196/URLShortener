@@ -21,9 +21,9 @@ def index():
             db.session.commit()
         else:
             c = u.codes.order_by(func.length(Code.code)).first()
-        return render_template("index.html", title="Index",
-                               form=form, code=c.code)
-    return render_template("index.html", title="Index", form=form)
+        return render_template(
+            "index.html.jinja", title="Index", form=form, code=c.code)
+    return render_template("index.html.jinja", title="Index", form=form)
 
 
 @app.route('/custom_code', methods=['GET', 'POST'])
@@ -38,10 +38,10 @@ def custom_code():
         db.session.add(c)
         db.session.commit()
 
-        return render_template("custom.html", title="Custom URL",
-                               form=form, code=c.code)
+        return render_template(
+            "custom.html.jinja", title="Custom URL", form=form, code=c.code)
 
-    return render_template("custom.html", title="Custom URL", form=form)
+    return render_template("custom.html.jinja", title="Custom URL", form=form)
 
 
 @app.route('/<code>')
@@ -55,29 +55,39 @@ def goto(code):
         return redirect(u.url)
     return redirect(url_for('index'))
 
-# TODO: implement statistic
 
-
-@app.route('/stats_all')
+@app.route('/stats/all')
 def stat_all():
 
-    return render_template("stat_all.html",
-                           title="Full statistic",
-                           urls=URL.query.outerjoin(Hit).group_by(URL.id).
-                           order_by(func.count(Hit.id).desc()))
+    return render_template(
+        "stat_all.html.jinja",
+        title="Full statistic",
+        urls=URL.query.outerjoin(Hit).group_by(URL.id).order_by(
+            func.count(Hit.id).desc()))
 
 
-@app.route('/stats/<int:url_id>')
-def stat(url_id):
+@app.route('/stats/url/<int:url_id>')
+def stat_url(url_id):
     u = URL.query.filter_by(id=url_id).first()
     if u is not None:
         codes = u.codes.order_by(func.length(Code.code))
-        codes_url = (Markup("<a href='{url}'>{url}</a>".
-                            format(url=url_for("goto", code=code.code, _external=True)))
+        codes_url = (Markup("<a href='{url}'>{url}</a>".format(
+            url=url_for("goto", code=code.code, _external=True)))
                      for code in codes)
-        return render_template("stat_url.html",
-                               title="Statistic",
-                               urls=[u],
-                               hits=u.hits.order_by(Hit.timestamp.desc()),
-                               codes=codes_url)
+        return render_template(
+            "stat_url.html.jinja",
+            title="Statistic",
+            urls=[u],
+            hits=u.hits.order_by(Hit.timestamp.desc()),
+            codes=codes_url)
     return url_for("index")
+
+
+@app.route('/stats/code/<int:code_id>')
+def stat_code():
+    return
+
+
+@app.route('/stats/hit/<int:hit_id>')
+def stat_hit():
+    return

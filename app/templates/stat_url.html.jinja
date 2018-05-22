@@ -1,0 +1,8 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+{% include '_url_table.html.jinja' %}
+{% set list = hits %}
+{% set list_name = "Time" %}
+{% include '_list_table.html.jinja' %}
+{% endblock %}

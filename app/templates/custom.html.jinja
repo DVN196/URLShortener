@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.jinja" %}
 
 {% block content %}
 <form action="" method="post">
@@ -18,7 +18,7 @@
         {% endfor %}
     </p>
     <p>{{ form.submit() }}</p>
-    {% include '_get_url.html' %}
+    {% include '_get_url.html.jinja' %}
     {% if code %}
     <p> The code for URL is: <a href="{{ url_for('goto', code=code ) }}">{{ code }}</a></p>
     {% endif %}

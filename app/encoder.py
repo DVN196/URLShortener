@@ -2,10 +2,11 @@
 
 from app.models import Code
 import string
+"""Generating the shorten URL"""
 
 digits = string.digits + string.ascii_lowercase
 base = len(digits)
-max_value = base ** 6
+max_value = base**6
 
 
 def encode(num):
